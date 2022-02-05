@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Header from '../components/Header'
 
 export default function Home() {
   return (
@@ -9,7 +10,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-red-300 text-white">Airbnb Clone starter template</div>
+      <Header />
+
     </div>
   )
 }
