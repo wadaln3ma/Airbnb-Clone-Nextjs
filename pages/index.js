@@ -1,8 +1,13 @@
+import axios from 'axios'
 import Head from 'next/head'
+import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
+import LargeCard from '../components/LargeCard'
+import MediumCard from '../components/MediumCard'
+import SmallCard from '../components/SmallCard'
 
-export default function Home() {
+export default function Home({ exploreData, cardsData }) {
   return (
     <div className="">
       <Head>
@@ -15,6 +20,52 @@ export default function Home() {
 
       <Hero />
 
+      <main className="max-w-7xl mx-auto px-8 sm:px-16">
+        <section className="pt-6">
+          <h2 className="pb-5 text-4xl font-bold">Explore Nearby</h2>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {exploreData?.map((item, i) => <SmallCard key={i} item={item} />)}
+          </div>
+
+
+        </section>
+
+        <section>
+          <h2 className="text-4xl py-8 font-semibold">Live Anywhere</h2>
+          <div className="flex space-x-3 overflow-scroll no-scrollbar p-3 -ml-3">
+            {cardsData?.map((item,i)=> <MediumCard key={i} item={item}/>)}
+          </div>
+        </section>
+
+        <sectioon>
+          <LargeCard
+          title="The Greatest Outdoor"
+          img="/images/village.webp"
+          description="Wishlists Curated by Airbnb."
+          btnText="Get Inspired" />
+        </sectioon>
+
+      </main>
+
+      <Footer />
+
     </div>
   )
+}
+
+export const getStaticProps = async ()=>{
+  const URL_EXPLORE_DATA = "https://jsonkeeper.com/b/4G1G" 
+  const URL_CARD_DATA = "https://jsonkeeper.com/b/VHHT"
+  
+    const exploreData = await axios.get(URL_EXPLORE_DATA).then(res=> res.data)
+
+    const cardsData = await axios.get(URL_CARD_DATA).then(res => res.data)
+
+  return {
+    props:{
+      exploreData,
+      cardsData,
+    },
+  }
 }

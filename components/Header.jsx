@@ -3,7 +3,7 @@ import { GlobeAltIcon, MenuIcon, SearchIcon, UserCircleIcon } from '@heroicons/r
 
 const Header = ()=>{
   return (
-    <header className="sticky top-0 z-99 p-5 md:px-10 bg-white shadow-md grid grid-cols-3">
+    <header className="sticky top-0 z-50 p-5 md:px-10 bg-white shadow-md grid grid-cols-3">
       <div className="relative flex items-center h-10 my-auto cursor-pointer">
         <Image alt=""
                src={'/images/airbnb-logo.png'}
