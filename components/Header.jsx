@@ -4,12 +4,26 @@ import {useState} from "react"
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import {DateRangePicker} from "react-date-range"
+import {useRouter} from "next/router"
 
-const Header = ()=>{
+const Header = ({ placeholder })=>{
+  const router = useRouter()
   const [searchInput, setSearchInput] = useState("")
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [noOfGuests, setNoOfGuests] = useState(1) 
+
+  const search = ()=>{
+    router.push({
+      pathname: '/search',
+      query: {
+        location : searchInput,
+        startDate : startDate.toISOString(),
+        endDate : endDate.toISOString(),
+        noOfGuests,
+      },
+    })
+  }
 
   const selectionRange = {
     startDate,
@@ -29,7 +43,7 @@ const Header = ()=>{
   return (
     <header className="sticky top-0 z-50 p-5 md:px-10 bg-white shadow-md grid grid-cols-3">
       <div className="relative flex items-center h-10 my-auto cursor-pointer">
-        <Image alt=""
+        <Image alt="" onClick={()=> router.push('/')}
                src={'/images/airbnb-logo.png'}
                layout="fill"
                objectPosition="left"
@@ -37,7 +51,7 @@ const Header = ()=>{
       </div>
 
       <div className="flex md:border-2 md:shadow-sm py-2 rounded-full">
-        <input type="text" placeholder="Start your search"
+        <input type="text" placeholder={ placeholder || "Start your search"}
                value={searchInput}
                onChange={(e) => setSearchInput(e.target.value)}
                className="outline-none flex-grow bg-transparent pl-5 placeholder-gray-400 text-sm text-gray-600" />
@@ -69,7 +83,7 @@ const Header = ()=>{
           </div>
           <div className="flex justify-around">
             <button onClick={resetInput} className="text-gray-500">Cancel</button>
-            <button className="text-red-400">Search</button>
+            <button onClick={search} className="text-red-400">Search</button>
           </div>
           
         </div>

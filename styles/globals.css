@@ -13,3 +13,9 @@
       scrollbar-width: none; /* Firefox */
     }
 }
+
+@layer components{
+  .button{
+    @apply cursor-pointer px-4 py-2 border rounded-full hover:shadow-lg active:bg-gray-100 active:scale-95 transition transform duration-100 ease-out;
+  }
+}
