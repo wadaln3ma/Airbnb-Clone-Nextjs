@@ -36,7 +36,7 @@ const Search = ({ data })=>{
         </section>
 
         <section className="hidden xl:inline-flex xl:min-w-[600px]">
-          <Map />
+          <Map places={data}/>
         </section>
       </main>
 
