@@ -4,6 +4,7 @@ import CardInfoItem from '../components/CardInfoItem'
 import {useRouter} from "next/router"
 import { format } from 'date-fns'
 import axios from "axios"
+import Map from "../components/Map"
 
 const Search = ({ data })=>{
   const router = useRouter()
@@ -32,6 +33,10 @@ const Search = ({ data })=>{
           </div>
 
           {data.map((item, i) => <CardInfoItem key={i} item={item} />)}
+        </section>
+
+        <section className="hidden xl:inline-flex xl:min-w-[600px]">
+          <Map />
         </section>
       </main>
 
